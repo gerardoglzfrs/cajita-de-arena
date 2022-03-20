@@ -1,0 +1,327 @@
+/* Color de iconos */
+.icon_blue {
+    color: #689aaf;
+}
+
+/* Color de letras */
+.bg_red {
+    background-color: #a25c68;
+}
+
+.bg_blue {
+    background-color: #6096ad;
+}
+
+.txt_white {
+    color: #ffffff;
+}
+
+.txt_blue {
+    color:#6096ad;
+}
+
+.txt_red {
+    color: #a25c68;
+}
+
+.txt_gray {
+    color: #7f7f7f;
+}
+
+/* titulos y subtitulos */
+.title_forms {
+    font-size: 1.8rem;
+}
+
+.txt_title {
+    color: #944453;
+}
+
+.txt_subtitle {
+    color: #04577a;
+}
+
+/* Borde text_area */
+.txtArea_border {
+    border: 1px solid #b4ccd7 !important;
+    outline:none !important;
+}
+
+.txtArea_border:focus {
+    outline:none !important; 
+    outline-width: 0 !important; 
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+/* Borde  bottom input */
+.border_bottom {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #6096ad;
+    background-color:transparent;
+}
+
+.border_bottom_other {
+    border-radius: 0;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #7f7f7f;
+    background-color:transparent;
+}
+
+/* color y letra radio buttons */
+.rbtn_text {
+    font-size: 0.9rem !important;
+}
+.rbtn_color {
+    accent-color: #347894;
+}
+
+/* Boton de los formularios */
+
+.btn_formluario {
+    background-color: #367894;
+    border-radius: 15px;
+}
+
+/* btn radius */
+.btn_radius {
+    border-radius: 15px;
+}
+
+/* Diseño de tablas */
+
+.th_style {
+    font-weight: normal;
+    color:#6096ad;
+    background-color: #ecf5fa;
+    border: 1px solid #b4ccd7 !important;
+}
+
+.border_table {
+    border: 1px solid #b4ccd7 !important;
+}
+
+.th_option_color {
+    font-weight: normal;
+    color:#6096ad;
+    background-color: #f8fcfd;
+    border: 1px solid #b4ccd7 !important;
+}
+
+/* toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #367894;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #367894;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(28px);
+    -ms-transform: translateX(28px);
+    transform: translateX(28px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Stepper */
+.step-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.step-indicator .step-icon {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #a25c68;
+    font-size: 10px;
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    line-height: 50px;
+} 
+
+.step.active .step-icon {
+    background: #a25c68;
+}
+
+.indicator-line {
+    width: 100%;
+    height: 1px;
+    background: #a25c68;
+    flex: 1;
+}
+
+.indicator-line.active {
+    background: #a25c68;
+}
+/* end */
+
+/* Boton contador */
+.margen {
+    margin-top: 29px;
+}
+
+.btn_contador_menos {
+    background-color: transparent; 
+}
+.btn_contador_mas {
+    background-color: transparent; 
+    padding-top: 1px;
+}
+
+.color_contador {
+    background-color: #367894;
+    border-radius: 24px;
+}
+
+/* Boton flotante back */
+.float-btn-back {
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:30px;
+	background-color: #a25c68;
+    border: none;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+    font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+    z-index:100;
+    cursor: pointer;
+    text-decoration: none !important;
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.float-btn-back:hover {
+	text-decoration: none !important;
+    color: #fff;
+    background-color: #af4c5d;
+}
+
+/*  Login, Definir contraseña y Restablecer contraseña */
+.title_slogan {
+    font-size: 2.2em;
+    color: #d00d29;
+    font-weight: 500;
+}
+
+.form_input-color {
+    background-color: #e3edf7 !important;
+}
+
+.form_input-color::placeholder {
+    color: #a1a1a1 !important; 
+}
+
+.label-color {
+    color: #689aaf !important;
+}
+
+.bg_btn_form {
+    background-color: #689aaf !important;
+    border-radius: 25px;
+    font-weight: 600;
+    color: white !important;
+}
+
+.small_hearth {
+    height: 80px;
+    width: 80px;
+}
+
+.icon_float {
+    cursor: pointer;
+    position: relative;
+    float: right;
+    margin-right: 8px;
+    margin-top: -24px;
+    color: #2496C7;
+}
+
+.msjError {
+    color: red;
+    font-size: 12px;
+}
+
+/* End login .... */
+
+/* Contenedor de errores */
+.contenedor-de-errores {
+    border-radius: 10px;
+    background-color: #f8d7da;
+    font-size: 0.8rem;
+}
+
+ul.lista-errores li {
+    display: inline;
+    padding-right: 0.9em;
+}
+/* Fin de contenedor de errores */
