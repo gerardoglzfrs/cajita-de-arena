@@ -1,4 +1,5 @@
 <script src="http://benalman.com/code/projects/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
+<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
 <template>
     <div>
         <b-navbar class="bg_red py-2" type="dark" toggleable="lg">
@@ -25,17 +26,18 @@
                     </b-navbar-nav>
                     <b-nav-form>
 
-                    <div class="d-flex content">
-                        <b-form-input class="input_navbar" autocomplete="off" list="my-list-id" v-model="query" placeholder="Buscar paciente"></b-form-input>
-                            <datalist id="my-list-id"  v-if="listOpen">
-                            
-                                <option class="click" v-for="user in users" :key="user.id" @click="onClick(user)">{{ user.login }}</option>
-                            
-                        </datalist>
-                        <a class="float-right py-2 mr-3">
-                            <i class="fa fa-search txt_white"></i>
-                        </a>
-                    </div>
+                    <!-- Este es el que jalaba -->
+                            <!-- <div class="d-flex content">
+                                <b-form-input class="input_navbar" autocomplete="off" list="my-list-id" v-model="query" placeholder="Buscar paciente"></b-form-input>
+                                    <datalist id="my-list-id"  v-if="listOpen">
+                                    
+                                        <option class="click" v-for="user in users" :key="user.id" @click="onClick(user)">{{ user.login }}</option>
+                                    
+                                </datalist>
+                                <a class="float-right py-2 mr-3">
+                                    <i class="fa fa-search txt_white"></i>
+                                </a>
+                            </div> -->
 
 
                        <!--  <section>
@@ -49,12 +51,42 @@
                         </section>   
  -->
                                 
-                        <!-- <div class="d-flex content"> 
-                            <vue-bootstrap-typeahead variant="secondary" id="vue-bts" class="form-control mr-1 mb-2 input_navbar"  @hit="onNombreSeleccionado" v-model="busqueda" :data="pacientes" placeholder="Busca pacientesn" />
-                            <a class="float-right py-2 mr-3 " href="">
+                    <div class="d-flex content py-auto my-auto"> 
+                            <vue-bootstrap-typeahead 
+                                variant="secondary"
+                                placeholder="Busca pacientes"  
+                                id="vue-bts" 
+                                class="form-control input_navbar"  
+                                @hit="onNombreSeleccionado" 
+                                v-model="query" 
+                                :ieCloseFix="false"
+                                :data="users"
+                                :serializer="item => item.login"
+                                 @input="lookupUser"
+                                 />
+                            
+                            
+                            <a class="float-right py-2 mr-3">
                                 <i class="fa fa-search txt_white"></i>
                             </a>
-                        </div> --> 
+                        </div>
+                        
+                   <!--  <div class="d-flex content pl-2"> 
+                             <advanced-search
+                            v-model="query"
+                            :options="options"
+                            class="my-auto mx-auto py-auto px-auto"
+                            placeholder="Buscar pacientes"
+                            multiple
+                            @select="hola(options)"
+
+                            >
+                            </advanced-search>
+
+                            <a class="float-right py-2 px-1 mr-3 " href="">
+                                <i class="fa fa-search txt_white"></i>
+                            </a>
+                        </div> -->
 
 
                     </b-nav-form>
@@ -86,6 +118,8 @@
 </template>
 
 <script>
+import AdvancedSearch from 'vue-advanced-search';
+
 import Logout from '@/components/Modals/Logout.vue'
 import router from '../router'
 import { EventBus } from '../EventBus';
@@ -93,21 +127,25 @@ import { mapState } from "vuex"
 import { url } from "../../settings"
 import axios from "axios"
 import _ from 'lodash';
+ import {debounce} from 'lodash';
 
 export default {
     name: 'Navbar',
-    components: { Logout },
+    components: { Logout, AdvancedSearch },
 
     data:() => ({
+
         query: '',
         users: [],
+        selecteduser: null,
+
         listOpen: true,
 
 
         openLogout: false,
         busqueda: "",
         pacientes: [],
-		nombres: ["Luis Cabrera", "Leon Scott Kennedy", "Claire Redfield", "Noble 6", "Chris Redfield", "Madeline", "Cuphead", "Mugman", "Ori"],
+
 		nombreSeleccionado: null,
     }),
 
@@ -117,25 +155,39 @@ export default {
 
      // WATCH
     watch: {
-        query: function() {
+        /* query: function() {
         this.search();
-        }
+        } */
     },
     
 
     methods: {
-            
+         lookupUser: debounce(function(){
+      // in practice this action should be debounced
+      fetch(`https://api.github.com/search/users?q=${this.query}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          this.users = data.items;
+        })
+    }, 500),   
 
 
-        search: _.debounce(
+        /* search: _.debounce(
             function() {
                 if(this.query.length > 1) {
                     axios
-                    .get('https://api.github.com/search/users?q=' + this.query + '+in:login')
+                    .post('http://192.241.134.211/api/usuarios/search/'+this.query,{
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Authorization': "Bearer "+ localStorage.getItem("token"),
+                        }
+                    })
                     .then(res => {
                         this.listOpen = true;
                         this.users = res.data.items;
-                        /* console.log(this.users); */
                         this.users.length = 10;
                     });
                 } else {
@@ -143,7 +195,7 @@ export default {
                     this.users = [];
                     this.listOpen = false;
                 }
-            }, 400),
+            }, 400), */
     
     onClick(user) {
         console.log("entre"+user);
@@ -203,6 +255,12 @@ export default {
 
         this.obtenerPacientes();
 
+        window.addEventListener("keypress", function(event){
+            if (event.keyCode == 13){
+                event.preventDefault();
+            }
+        }, false);
+
     }
 }
 </script>
@@ -222,46 +280,6 @@ export default {
         width: 40px;
         transform: scale(1.4);
     }
-
-/*  */
-/* .searchbox {
-  padding: 20px 0 0 0;
-  text-align: center;
-
-}
-.searchbox input {
-  width: 60%;
-  height: 30px;
-  font-size: 16px;
-  padding: 0 10px;
-  border: 1px solid silver;
-}
- */
-.results {
-  float: right;
-  padding-right: 20px;
-  justify-content: center;
-}
-
-.results:active {
-    display: none;
-}
-
-.results ul {
-  width: auto;
-  padding-top: 5px;
-  
-}
-.results li {
-  padding: 5px;
-  border-bottom: 1px dotted #DB04CC;
-  display: flex;
-  align-items: center;
-}
-.results li:hover {
-  background-color: rgba(221, 221, 221, .5);
-  cursor: pointer;
-}
 
     .content {
         border: solid 1px white;
@@ -284,11 +302,24 @@ export default {
         color:white;
     }
 
-    @media only screen and (max-width: 500px) {
+    @media only screen and (max-width: 576px) {
         .input_navbar {
-            width: auto;
+            width: 80vw;
         }
     }
+
+    @media only screen and (max-width: 350px) {
+        .input_navbar {
+            width: 70vw;
+        }
+    }
+
+
+    /* @media only screen and (max-width: 500px) {
+        .input_navbar {
+            width: 100vw;
+        }
+    } */
 
     .form-rounded {
         border: none;
