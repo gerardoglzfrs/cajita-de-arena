@@ -8925,6 +8925,15 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
+"vue-typeahead-bootstrap@^2.12.0":
+  "integrity" "sha512-8TAe6UkR796oZA1xVuKlEqSBfg4YpZ3tCO5RNUHexxlOl2N3x5HpOOMqQp/qbRSzuwal2n/hKLjUkYaifgGSxQ=="
+  "resolved" "https://registry.npmjs.org/vue-typeahead-bootstrap/-/vue-typeahead-bootstrap-2.12.0.tgz"
+  "version" "2.12.0"
+  dependencies:
+    "lodash" "^4.17.20"
+    "resize-observer-polyfill" "^1.5.0"
+    "vue" "^2.5.17"
+
 "vue-typeahead@^2.3.2":
   "integrity" "sha1-sMEPH59kosZnv/cKAWaQjr1ayQQ="
   "resolved" "https://registry.npmjs.org/vue-typeahead/-/vue-typeahead-2.3.2.tgz"

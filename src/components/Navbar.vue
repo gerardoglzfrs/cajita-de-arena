@@ -50,26 +50,24 @@
                           
                         </section>   
  -->
-                                
-                    <div class="d-flex content py-auto my-auto"> 
-                            <vue-bootstrap-typeahead 
-                                variant="secondary"
-                                placeholder="Busca pacientes"  
-                                id="vue-bts" 
-                                class="form-control input_navbar"  
-                                @hit="onNombreSeleccionado" 
-                                v-model="query" 
-                                :ieCloseFix="false"
-                                :data="users"
-                                :serializer="item => item.login"
-                                 @input="lookupUser"
-                                 />
-                            
-                            
-                            <a class="float-right py-2 mr-3">
-                                <i class="fa fa-search txt_white"></i>
-                            </a>
-                        </div>
+                <div class="d-flex content pl-2">  
+                    <vue-typeahead-bootstrap
+                        class="px-1 input_navbar"
+                        v-model="query"
+                        :data="users"
+                        :serializer="item => item.login"
+                        highlightClass="special-highlight-class"
+                        @hit="onNombreSeleccionado"
+                        :minMatchingChars="3"
+                        placeholder="Buscar pacientes"
+                        inputClass="special-input-class"
+                        :disabledValues="(selecteduser ? [selecteduser.login] : [])"
+                        @input="lookupUser"
+                        />
+                        <a class="float-right py-2 px-1 mr-3 " href="">
+                            <i class="fa fa-search txt_white"></i>
+                        </a>
+                </div>
                         
                    <!--  <div class="d-flex content pl-2"> 
                              <advanced-search
@@ -125,8 +123,8 @@ import router from '../router'
 import { EventBus } from '../EventBus';
 import { mapState } from "vuex"
 import { url } from "../../settings"
-import axios from "axios"
-import _ from 'lodash';
+/* import axios from "axios"
+import _ from 'lodash'; */
  import {debounce} from 'lodash';
 
 export default {
@@ -265,7 +263,30 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+/* de */
+   .special-input-class{
+    background-color: transparent !important;
+    border: none !important;
+    width: 400px !important;
+    color: white !important;
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+    .special-input-class::placeholder {
+        color: white !important;
+    }
+
+  .special-highlight-class{
+    font-weight: 900;
+    color: #585656 !important;
+  }
+
+/* end ed */
+
     .click {
         cursor: pointer;
     }
@@ -286,21 +307,7 @@ export default {
         border-radius: 1rem;
         margin-right: 10px;
     }
-    
-    .input_navbar {
-        border: none;
-        color:white;
-        width: 400px;
-        background-color: transparent !important;
-        outline: none !important;
-        box-shadow: none !important;
-        margin-bottom: 5px;
-        
-    }
 
-    .input_navbar::placeholder {
-        color:white;
-    }
 
     @media only screen and (max-width: 576px) {
         .input_navbar {
@@ -346,6 +353,10 @@ export default {
 
     .option:hover {
         border-bottom: 2px solid #fff;
+    }
+
+    input {
+        background-color: blue;
     }
 
 </style>

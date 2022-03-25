@@ -7,12 +7,14 @@ import router from './router'
 import store from './store'
 import bootstrapVue from './plugins/bootstrap-vue'
 import global from './assets/global.css'
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import 'bootstrap/scss/bootstrap.scss';
 
 Vue.config.productionTip = false
-Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+Vue.component('vue-typeahead-bootstrap', VueTypeaheadBootstrap)
+
 Vue.use(VueAxios, axios)
 
 new Vue({
@@ -21,5 +23,5 @@ new Vue({
   store,
   global,
   bootstrapVue,
-  VueBootstrapTypeahead
+  VueTypeaheadBootstrap
 }).$mount('#app')
